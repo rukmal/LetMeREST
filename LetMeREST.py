@@ -24,7 +24,10 @@ For usage instructions, try: letmerest --help
 '''
 
 def printFileError(file):
-	print 
+	print '''
+Error: Failed to open ''' + file + '''
+For help, try: letmerest --help
+'''
 
 def readArguments():
 	args = sys.argv[1:]
@@ -58,5 +61,23 @@ def readArguments():
 		sys.exit(0)
 	return [validArgs, fileArgs]
 
+# Isolating arguments
+
 args = readArguments()
-print args
+
+options = args[0]
+files = args[1]
+
+data = ''
+if 'i' in options or 'stdin' in options:
+	# Reading from stdin
+	for line in sys.stdin:
+		data += line
+else:
+	try:
+		f = open(files[0], 'r')
+		for line in f.readlines():
+			data += line
+	except:
+		printFileError(files[0])
+print data
