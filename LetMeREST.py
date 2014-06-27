@@ -61,6 +61,15 @@ def readArguments():
 		sys.exit(0)
 	return [validArgs, fileArgs]
 
+def loadJSON(data):
+	try:
+		parseddata = json.loads(data)
+		return parseddata
+	except:
+		print '''
+		Error: Invalid JSON.
+		'''
+
 # Isolating arguments
 
 args = readArguments()
@@ -68,16 +77,24 @@ args = readArguments()
 options = args[0]
 files = args[1]
 
+# Grabbing input data
+
 data = ''
 if 'i' in options or 'stdin' in options:
 	# Reading from stdin
 	for line in sys.stdin:
 		data += line
 else:
+	# Attempting to open file
 	try:
 		f = open(files[0], 'r')
 		for line in f.readlines():
 			data += line
 	except:
 		printFileError(files[0])
-print data
+		sys.exit(0)
+
+# Parsing JSON data
+parseddata = loadJSON(data)
+
+# Time to do the HTML stuff
