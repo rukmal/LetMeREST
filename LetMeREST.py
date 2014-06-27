@@ -2,25 +2,29 @@ import json
 import sys
 
 # Constants
-VALID_ARGUMENTS = ['i', 'o', 'help', 'stdin', 'stdout']
-
-def printDocumentation():
-    print '''
+VALID_ARGUMENTS = ['i', 'stdin', 'o', 'stdout', 'help']
+DOCUMENTATION = '''
 NAME
-    letmerest -- automatic REST api documentation generation
+	letmerest -- automatic REST api documentation generation
 
 SYNOPSIS
-    letmerest [-io] [input JSON file] [output HTML file]
+	letmerest [-io] [input JSON file] [output HTML file]
 
 DESCRIPTION
-    Testing
-    '''
+	Testing
+'''
 
-def printError(error):
-    print ''
-    print 'Invalid argument(s): ' + str(error)
-    print 'For usage instructions, try: letmerest --help'
-    print ''
+def printDocumentation():
+	print DOCUMENTATION
+
+def printArgsError(error):
+	print '''
+Invalid argument(s): ''' + str(error) + '''
+For usage instructions, try: letmerest --help
+'''
+
+def printFileError(file):
+	print 
 
 def readArguments():
 	args = sys.argv[1:]
@@ -47,13 +51,12 @@ def readArguments():
 		else:
 			errorArgs.append(arg)
 	if len(errorArgs) > 0:
-		printError(errorArgs)
+		printArgsError(errorArgs)
 		sys.exit(0)
 	if 'help' in validArgs:
 		printDocumentation()
 		sys.exit(0)
 	return [validArgs, fileArgs]
 
-#printDocumentation()
 args = readArguments()
 print args
