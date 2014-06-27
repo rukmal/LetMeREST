@@ -2,7 +2,7 @@ import json
 import sys
 
 # Constants
-POSSIBLE_ARGS = ['i', 'o', '--help']
+VALID_ARGUMENTS = ['i', 'o', 'help', 'stdin', 'stdout']
 
 def printDocumentation():
     print '''
@@ -26,18 +26,34 @@ def readArguments():
 	args = sys.argv[1:]
 	errorArgs = []
 	validArgs = []
+	fileArgs = []
+	possibleArgs = []
 	for arg in args:
-		if arg not in POSSIBLE_ARGS:
-			errorArgs.append(arg)
+		if arg[0] == '-' and arg[1] == '-':
+			arg = arg[2:]
+			possibleArgs.append(arg)
+		elif arg[0] == '-':
+			arg = arg[1:]
+			if len(arg) > 1:
+				for c in arg:
+					possibleArgs.append(c)
+			else:
+				possibleArgs.append(arg)
 		else:
+			fileArgs.append(arg)
+	for arg in possibleArgs:
+		if arg in VALID_ARGUMENTS:
 			validArgs.append(arg)
+		else:
+			errorArgs.append(arg)
 	if len(errorArgs) > 0:
 		printError(errorArgs)
 		sys.exit(0)
-	if '--help' in validArgs:
+	if 'help' in validArgs:
 		printDocumentation()
 		sys.exit(0)
-	return validArgs
+	return [validArgs, fileArgs]
 
 #printDocumentation()
 args = readArguments()
+print args
