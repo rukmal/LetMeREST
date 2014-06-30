@@ -73,6 +73,7 @@ def loadJSON(data):
 		print '''
 		Error: Invalid JSON.
 		'''
+		sys.exit(0)
 
 # Isolating arguments
 
