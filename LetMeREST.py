@@ -104,4 +104,4 @@ parseddata = loadJSON(data)
 # Time to do the HTML stuf
 f = open('index.html', 'r')
 template = Template(f.read())
-print template.render(name='Rukmal Weerawarana')
+print template.render(parseddata)
