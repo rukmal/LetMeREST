@@ -93,7 +93,7 @@
 					},
 					{
 						"name": "status_id",
-						"description": "ID of the old status",
+						"description": "ID of the old status"
 					},
 					{
 						"name": "new_status",

@@ -35,6 +35,9 @@ def readArguments():
 	validArgs = []
 	fileArgs = []
 	possibleArgs = []
+	if len(args) == 0:
+		printDocumentation()
+		sys.exit(0)
 	for arg in args:
 		if arg[0] == '-' and arg[1] == '-':
 			arg = arg[2:]
@@ -97,4 +100,6 @@ else:
 # Parsing JSON data
 parseddata = loadJSON(data)
 
-# Time to do the HTML stuff
+print json.dumps(parseddata)
+
+# Time to do the HTML stuf
