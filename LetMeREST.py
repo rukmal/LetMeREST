@@ -1,5 +1,6 @@
 import json
 import sys
+from jinja2 import Environment, PackageLoader, Template
 
 # Constants
 VALID_ARGUMENTS = ['i', 'stdin', 'o', 'stdout', 'help']
@@ -100,6 +101,7 @@ else:
 # Parsing JSON data
 parseddata = loadJSON(data)
 
-print json.dumps(parseddata)
-
 # Time to do the HTML stuf
+f = open('index.html', 'r')
+template = Template(f.read())
+print template.render(name='Rukmal Weerawarana')
