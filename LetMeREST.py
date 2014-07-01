@@ -128,6 +128,7 @@ try:
 	template = parseddata['template']
 except:
 	template = 'default'
+f = None
 try:
 	f = open('templates/' + template + '.jinja', 'r')
 except:
@@ -144,4 +145,31 @@ Available templates:'''
 loadedTemplate = Template(f.read())
 
 # Rendering the template
-renderedTemplate = template.render(parseddata)
+renderedTemplate = loadedTemplate.render(parseddata)
+
+# Checking if the user wants to print to stdout or output to file
+if 'o' in options or 'stdout' in options:
+	print renderedTemplate
+else:
+	# Trying to open the output file
+	outputfile = None
+	try:
+		outputfile = open(files[1], 'w')
+	except:
+		# Checking if output file has been specified
+		if len(files) < 2:
+			print '''
+Error: Output file not specified.
+For more help, try: letmerest --help
+'''
+		# If file has been specified, it cannot be opened
+		else:
+			printFileError(files[1])
+		sys.exit(1)
+	# Writing data to output file
+	outputfile.write(renderedTemplate)
+	outputfile.close()
+	print '''
+API documentation generated successfully.
+'''
+sys.exit(0)

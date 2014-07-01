@@ -4,7 +4,6 @@
 	"version": "0.1.0",
 	"author": "Rukmal Weerawarana",
 	"base_url": "http://rukmal.me",
-	"template": "blah",
 	"main_endpoints": {
 		"/user": [
 			{
