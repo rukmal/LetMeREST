@@ -3,3 +3,8 @@
 
 # Ignoring pycache files
 *.pyc
+
+# Ignoring setup.py stuff
+dist
+build
+LetMeREST.egg-info
