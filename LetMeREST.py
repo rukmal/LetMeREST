@@ -6,7 +6,7 @@ import os
 from jinja2 import Environment, PackageLoader, Template
 
 # Constants
-VALID_ARGUMENTS = ['i', 'stdin', 'o', 'stdout', 't', 'template', 'help']
+VALID_ARGUMENTS = ['i', 'stdin', 'o', 'stdout', 'help']
 DOCUMENTATION = '''
 NAME
 	letmerest -- automatic REST api documentation generation
@@ -15,7 +15,24 @@ SYNOPSIS
 	letmerest [-i | --stdin <read from stdin>] [-o | --stdout <output to stdout>] [input JSON file] [output HTML file]
 
 DESCRIPTION
-	The letmerest utility auto-creates REST API documentation, returning output in the form of an HTML5 webpage. This utility takes input in the form of JSON.
+	The letmerest utility auto-creates REST API documentation, returning output in the form of an HTML5 webpage. This utility takes input in the form of JSON (see example at: http://github.com/rukmal/LetMeREST). This utility supports multiple template. Specific layouts can be detailed in the JSON file with the key 'template'. If this is not included, the utility reverts to the default.
+
+	The options are as follows:
+
+	-i | --stdin
+		This option causes the application to read the input JSON in from stdin. This option is useful for piping.
+
+	-o | --stdout
+		This option causes the program to output to stdout. This option is also useful for piping.
+
+	--help
+		This option displays the usage instuctions of letmerest.
+
+EXIT STATUS
+	The letmerest utility exits 0 on success, and >0 if an error occurs.
+
+SEE ALSO
+	The project repo at: http://github.com/rukmal/LetMeREST.
 '''
 
 def printDocumentation():
