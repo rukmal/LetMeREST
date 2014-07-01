@@ -3,7 +3,7 @@
 import json
 import sys
 import os
-from jinja2 import Environment, PackageLoader, Template
+from jinja2 import Template
 
 # Constants
 VALID_ARGUMENTS = ['i', 'stdin', 'o', 'stdout', 'help']
@@ -32,7 +32,7 @@ EXIT STATUS
 	The letmerest utility exits 0 on success, and >0 if an error occurs.
 
 SEE ALSO
-	The project repo at: http://github.com/rukmal/LetMeREST.
+	The project repository at: http://github.com/rukmal/LetMeREST.
 '''
 
 def printDocumentation():
@@ -139,5 +139,9 @@ Available templates:'''
 		print "\t" + template.split('.')[0]
 	print
 	sys.exit(1)
-# template = Template(f.read())
-# print template.render(parseddata)
+
+# Loading the template
+loadedTemplate = Template(f.read())
+
+# Rendering the template
+renderedTemplate = template.render(parseddata)
