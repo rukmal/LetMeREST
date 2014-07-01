@@ -1,18 +1,21 @@
+#!/usr/bin/python
+
 import json
 import sys
+import os
 from jinja2 import Environment, PackageLoader, Template
 
 # Constants
-VALID_ARGUMENTS = ['i', 'stdin', 'o', 'stdout', 'help']
+VALID_ARGUMENTS = ['i', 'stdin', 'o', 'stdout', 't', 'template', 'help']
 DOCUMENTATION = '''
 NAME
 	letmerest -- automatic REST api documentation generation
 
 SYNOPSIS
-	letmerest [-io] [input JSON file] [output HTML file]
+	letmerest [-i | --stdin <read from stdin>] [-o | --stdout <output to stdout>] [input JSON file] [output HTML file]
 
 DESCRIPTION
-	Testing
+	The letmerest utility auto-creates REST API documentation, returning output in the form of an HTML5 webpage. This utility takes input in the form of JSON.
 '''
 
 def printDocumentation():
@@ -38,7 +41,7 @@ def readArguments():
 	possibleArgs = []
 	if len(args) == 0:
 		printDocumentation()
-		sys.exit(0)
+		sys.exit(1)
 	for arg in args:
 		if arg[0] == '-' and arg[1] == '-':
 			arg = arg[2:]
@@ -59,10 +62,10 @@ def readArguments():
 			errorArgs.append(arg)
 	if len(errorArgs) > 0:
 		printArgsError(errorArgs)
-		sys.exit(0)
+		sys.exit(1)
 	if 'help' in validArgs:
 		printDocumentation()
-		sys.exit(0)
+		sys.exit(1)
 	return [validArgs, fileArgs]
 
 def loadJSON(data):
@@ -71,9 +74,9 @@ def loadJSON(data):
 		return parseddata
 	except:
 		print '''
-		Error: Invalid JSON.
+Error: Invalid JSON.
 		'''
-		sys.exit(0)
+		sys.exit(1)
 
 # Isolating arguments
 
@@ -97,12 +100,27 @@ else:
 			data += line
 	except:
 		printFileError(files[0])
-		sys.exit(0)
+		sys.exit(1)
 
 # Parsing JSON data
 parseddata = loadJSON(data)
 
-# Time to do the HTML stuf
-f = open('index.html', 'r')
-template = Template(f.read())
-print template.render(parseddata)
+# Dealing with template options
+template = ''
+try:
+	template = parseddata['template']
+except:
+	template = 'default'
+try:
+	f = open('templates/' + template + '.jinja', 'r')
+except:
+	print '''
+Error: Template ''' + template + ''' does not exist.
+
+Available templates:'''
+	for template in os.listdir('templates'):
+		print "\t" + template.split('.')[0]
+	print
+	sys.exit(1)
+# template = Template(f.read())
+# print template.render(parseddata)

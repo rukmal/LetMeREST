@@ -1,8 +1,10 @@
 {
 	"name": "demo-api",
+	"description": "This is a demo API.",
 	"version": "0.1.0",
-	"author": "John Smith",
+	"author": "Rukmal Weerawarana",
 	"base_url": "http://rukmal.me",
+	"template": "blah",
 	"main_endpoints": {
 		"/user": [
 			{
