@@ -1,0 +1,142 @@
+{
+	"name": "demo-api",
+	"description": "This is a demo API.",
+	"version": "0.1.0",
+	"author": "Rukmal Weerawarana",
+	"base_url": "http://rukmal.me",
+	"main_endpoints": {
+		"/user": [
+			{
+				"endpoint": "/user/add",
+				"description": "Endpoint to add a new user to the system",
+				"http_method": "POST",
+				"request_headers": [
+					{
+						"name": "username",
+						"description": "Username of the new user"
+					},
+					{
+						"name": "password",
+						"description": "Password of the new user"
+					}
+				],
+				"returns": [
+					{
+						"http_code": "200",
+						"description": "All OK. User added successfully"
+					},
+					{
+						"http_code": "500",
+						"description": "Internal server error. See logs"
+					}
+				]
+			},
+			{
+				"endpoint": "/user/friends",
+				"description": "Endpoint to get a user's friends",
+				"http_method": "GET",
+				"request_headers": [
+					{
+						"name": "username",
+						"description": "Username of the user"
+					}
+				],
+				"returns": [
+					{
+						"http_code": "200",
+						"description": "All OK. JSON Array of friends returned"
+					},
+					{
+						"http_code": "500",
+						"description": "Internal server error. See logs"
+					}
+				]
+			}
+		],
+		"/status": [
+			{
+				"endpoint": "/status/new",
+				"description": "Endpoint to add a new user status to the system",
+				"http_method": "POST",
+				"request_headers": [
+					{
+						"name": "username",
+						"description": "Username of the owner of the status"
+					},
+					{
+						"name": "status_id",
+						"description": "ID of the new status"
+					},
+					{
+						"name": "status_text",
+						"description": "Text of the new status"
+					}
+				],
+				"returns": [
+					{
+						"http_code": "200",
+						"description": "All OK. New status object returned"
+					},
+					{
+						"http_code": "500",
+						"description": "Internal server error. See logs"
+					}
+				]
+			},
+			{
+				"endpoint": "/status/edit",
+				"description": "Endpoint to edit a current user status",
+				"http_method": "PUT",
+				"request_headers": [
+					{
+						"name": "username",
+						"description": "Username of the owner of the status"
+					},
+					{
+						"name": "status_id",
+						"description": "ID of the old status"
+					},
+					{
+						"name": "new_status",
+						"description": "New status text"
+					}
+				],
+				"returns": [
+					{
+						"http_code": "200",
+						"description": "All OK. Modified status object returned"
+					},
+					{
+						"http_code": "500",
+						"description": "Internal server error. See logs"
+					}
+				]
+			},
+			{
+				"endpoint": "/status/remove",
+				"description": "Endpoint to remove a status from the system",
+				"http_method": "DELETE",
+				"request_headers": [
+					{
+						"name": "username",
+						"description": "Username of the owner of the status"
+					},
+					{
+						"name": "status_id",
+						"description": "Status ID of the old status"
+					}
+				],
+				"returns": [
+					{
+						"http_code": "200",
+						"description": "All OK. Status deleted."
+					},
+					{
+						"http_code": "500",
+						"description": "Internal server error. See logs"
+					}
+				]
+			}
+		]
+	}
+}
