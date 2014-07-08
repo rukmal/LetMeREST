@@ -14,7 +14,7 @@ setup(
 	],
 	entry_points = {
 		'console_scripts': [
-			'lmr = LetMeREST:main',
+			'letmerest = LetMeREST:main',
 		],
 	}
 )
