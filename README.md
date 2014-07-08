@@ -1,3 +1,3 @@
 <p align='center'><img src='bin/logo.png'></p>
 
-A utility that creates auto-generated pretty docs for REST APIs.
+LetMeREST is a utility that auto-generates REST API documentation.
