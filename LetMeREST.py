@@ -36,7 +36,7 @@ SEE ALSO
 	The project repository at: http://github.com/rukmal/LetMeREST.
 '''
 
-def printDocumentation(self):
+def printDocumentation():
 	print DOCUMENTATION
 
 def printArgsError(error):
