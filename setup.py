@@ -10,7 +10,7 @@ setup(
 	url = 'http://github.com/rukmal/LetMeREST',
 	scripts = ['LetMeREST.py'],
 	install_requires = [
-		"Jinja2==2.7.1"
+		"Jinja2==2.11.3"
 	],
 	entry_points = {
 		'console_scripts': [
